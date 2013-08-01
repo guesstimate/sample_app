@@ -45,4 +45,22 @@ describe "StaticPages" do
 
     it_should_behave_like "all static pages"
   end
+
+  it "should have the right links on the layout" do
+    visit root_path
+
+    pages = {
+      'About' => 'About Us',
+      'Help' => 'Help',
+      'Contact' => 'Contact',
+      'Home' => '',
+      'Sign up now!' => 'Sign up',
+      'sample app' => ''
+    }
+
+    pages.each do |link, title|
+      click_link link
+      expect(page).to have_title(full_title(title))
+    end
+  end
 end
